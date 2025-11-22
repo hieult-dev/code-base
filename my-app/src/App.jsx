@@ -1,28 +1,62 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+// 🧩 Function component con – nhận props từ App
+function UserInfo({ user, onIncreaseAge, onCityChange }) {
+  return (
+    <div className="card">
+      <h2>👤 Thông tin người dùng (component con)</h2>
+      <p>Tên: {user.name}</p>
+      <p>Tuổi: {user.age}</p>
+      <p>Thành phố: {user.city}</p>
+
+      <button onClick={onIncreaseAge}>Tăng tuổi</button>
+      <br /><br />
+      <input
+        type="text"
+        value={user.city}
+        onChange={onCityChange}
+        placeholder="Nhập thành phố mới..."
+      />
+
+      <p>
+        <code>user</code> hiện tại: {JSON.stringify(user)}
+      </p>
+    </div>
+  )
+}
+
 function App() {
-  // 1️⃣ State đầu tiên (ví dụ cũ)
   const [count, setCount] = useState(0)
 
-  // 2️⃣ Object state nâng cao
   const [user, setUser] = useState({
     name: 'Tu',
     age: 21,
     city: 'Hà Nội'
   })
 
-  // 3️⃣ Hàm cập nhật tuổi
   const increaseAge = () => {
     setUser({ ...user, age: user.age + 1 })
   }
 
-  // 4️⃣ Hàm đổi thành phố
   const handleCityChange = (e) => {
     setUser({ ...user, city: e.target.value })
   }
+
+  // chạy mỗi khi render lại
+  useEffect(() => {
+    console.log('Hello, chạy mỗi khi màn hình render lại')
+  })
+  // chạy duy nhất 1 lần khi render lần đầu
+  useEffect(() => {
+    console.log('Chạy 1 lần duy nhất khi mở trang')
+  }, [])
+  // chạy khi các dep thay đổi
+  useEffect(() => {
+    console.log('Count: ', count)
+  }, [count])
 
   return (
     <>
@@ -43,26 +77,14 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-
-        {/* Mới: ví dụ về object */}
-        <h2>👤 Thông tin người dùng</h2>
-        <p>Tên: {user.name}</p>
-        <p>Tuổi: {user.age}</p>
-        <p>Thành phố: {user.city}</p>
-
-        <button onClick={increaseAge}>Tăng tuổi</button>
-        <br /><br />
-        <input
-          type="text"
-          value={user.city}
-          onChange={handleCityChange}
-          placeholder="Nhập thành phố mới..."
-        />
-
-        <p>
-          <code>user</code> hiện tại: {JSON.stringify(user)}
-        </p>
       </div>
+
+      {/* 🔽 Dùng component con, truyền props xuống */}
+      <UserInfo
+        user={user}                  // object user → props.user
+        onIncreaseAge={increaseAge}  // function → props.onIncreaseAge
+        onCityChange={handleCityChange} // function → props.onCityChange
+      />
 
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
