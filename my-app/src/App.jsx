@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useReducer } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,11 +8,11 @@ function App() {
   const [count, setCount] = useState(5)
   const [count2, setCount2] = useState(0)
 
-  const [user, setUser] = useState({
-    name: 'Tu',
-    age: 21,
-    city: 'Hà Nội'
-  })
+  // const [user, setUser] = useState({
+  //   name: 'Tu',
+  //   age: 21,
+  //   city: 'Hà Nội'
+  // })
 
   const increaseAge = () => {
     setUser({ ...user, age: user.age + 1 })
@@ -40,7 +40,7 @@ function App() {
   // }, [count])
 
   const increaseCount = () => {
-    setCount((count) => count + 1)
+    dispatch({ type: 'INCREASE_AGE' })
   }
 
   const decreaseCount = () => {
@@ -49,6 +49,40 @@ function App() {
 
   const resetCount = () => {
     setCount(0)
+  }
+
+  const initialUser = {
+    name: 'Tu',
+    age: 21,
+    city: 'Hà Nội'
+  }
+
+  const [user, dispatch] = useReducer(userReducer, initialUser)
+
+
+  function userReducer(state, action) {
+    switch (action.type) {
+      case 'INCREASE_AGE':
+        return {
+          ...state,
+          age: state.age + 1
+        }
+
+      case 'CHANGE_CITY':
+        return {
+          ...state,
+          city: action.payload
+        }
+
+      case 'CHANGE_NAME':
+        return {
+          ...state,
+          name: action.payload
+        }
+
+      default:
+        return state
+    }
   }
 
   return (
