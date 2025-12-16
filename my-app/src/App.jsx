@@ -2,34 +2,11 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
-// 🧩 Function component con – nhận props từ App
-function UserInfo({ user, onIncreaseAge, onCityChange }) {
-  return (
-    <div className="card">
-      <h2>👤 Thông tin người dùng (component con)</h2>
-      <p>Tên: {user.name}</p>
-      <p>Tuổi: {user.age}</p>
-      <p>Thành phố: {user.city}</p>
-
-      <button onClick={onIncreaseAge}>Tăng tuổi</button>
-      <br /><br />
-      <input
-        type="text"
-        value={user.city}
-        onChange={onCityChange}
-        placeholder="Nhập thành phố mới..."
-      />
-
-      <p>
-        <code>user</code> hiện tại: {JSON.stringify(user)}
-      </p>
-    </div>
-  )
-}
-
+import { UserContext } from './context/UserContext.js'
+import { UserInfo } from './component/UserInfo.jsx'
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(5)
+  const [count2, setCount2] = useState(0)
 
   const [user, setUser] = useState({
     name: 'Tu',
@@ -41,22 +18,38 @@ function App() {
     setUser({ ...user, age: user.age + 1 })
   }
 
+  const changeCount2 = () => {
+    setCount2((count2) => count2 + count)
+  }
+
   const handleCityChange = (e) => {
     setUser({ ...user, city: e.target.value })
   }
 
-  // chạy mỗi khi render lại
-  useEffect(() => {
-    console.log('Hello, chạy mỗi khi màn hình render lại')
-  })
-  // chạy duy nhất 1 lần khi render lần đầu
-  useEffect(() => {
-    console.log('Chạy 1 lần duy nhất khi mở trang')
-  }, [])
-  // chạy khi các dep thay đổi
-  useEffect(() => {
-    console.log('Count: ', count)
-  }, [count])
+  // // chạy mỗi khi render lại
+  // useEffect(() => {
+  //   console.log('Hello, chạy mỗi khi màn hình render lại')
+  // })
+  // // chạy duy nhất 1 lần khi render lần đầu
+  // useEffect(() => {
+  //   console.log('Chạy 1 lần duy nhất khi mở trang')
+  // }, [])
+  // // chạy khi các dep thay đổi
+  // useEffect(() => {
+  //   console.log('Count: ', count)
+  // }, [count])
+
+  const increaseCount = () => {
+    setCount((count) => count + 1)
+  }
+
+  const decreaseCount = () => {
+    setCount((count) => count - 1)
+  }
+
+  const resetCount = () => {
+    setCount(0)
+  }
 
   return (
     <>
@@ -77,14 +70,21 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <button onClick={changeCount2}>
+          count2 is {count2} (tăng khi cộng dồn count vào)
+        </button>
       </div>
 
       {/* 🔽 Dùng component con, truyền props xuống */}
-      <UserInfo
-        user={user}                  // object user → props.user
-        onIncreaseAge={increaseAge}  // function → props.onIncreaseAge
-        onCityChange={handleCityChange} // function → props.onCityChange
-      />
+      <UserContext.Provider
+        value={{
+          user,
+          increaseAge,
+          handleCityChange
+        }}
+      >
+        <UserInfo />
+      </UserContext.Provider>
 
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
