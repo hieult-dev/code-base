@@ -1,7 +1,7 @@
 import { UserContext } from '../context/UserContext.js'
 import { useContext } from 'react'
-export function UserInfo() {
-    const { user, increaseAge, handleCityChange } = useContext(UserContext);
+export default function UserInfo() {
+    const { user, increaseCount, handleCityChange } = useContext(UserContext);
     return (
         <div className="card">
             <h2>👤 Thông tin người dùng (component con)</h2>
@@ -9,7 +9,7 @@ export function UserInfo() {
             <p>Tuổi: {user.age}</p>
             <p>Thành phố: {user.city}</p>
 
-            <button onClick={increaseAge}>Tăng tuổi</button>
+            <button onClick={increaseCount}>Tăng tuổi</button>
             <br /><br />
             <input
                 type="text"
