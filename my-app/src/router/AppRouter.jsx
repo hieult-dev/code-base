@@ -10,9 +10,9 @@ export default function AppRouter() {
       path: '/',
       element: <MainLayout />,
       children: [
-        { index: true, element: <Home /> },    
-        { path: 'user', element: <UserInfo /> }, 
-        { path: 'about', element: <About /> }  
+        { index: true, element: <Home /> },
+        { path: 'user', element: <UserInfo /> },
+        { path: 'about', element: <About /> }
       ]
     }
   ]);
