@@ -1,0 +1,49 @@
+type Course{
+    id: ID!
+    name: String!
+    description: String!
+    active: Boolean!
+    urlImg: String!
+}
+
+input CourseCreate {
+    name: String!
+    description: String!
+    active: Boolean!
+    urlImg: String!
+}
+
+input CourseUpdate {
+    id: ID!
+    name: String!
+    description: String!
+    active: Boolean!
+    urlImg: String!
+}
+
+input CustomPageable {
+    page: Int
+    size: Int
+}
+
+type CoursePage {
+    items: [Course!]!
+    totalElements: Int!
+    totalPages: Int!
+    page: Int!
+    size: Int!
+    hasNext: Boolean!
+    hasPrevious: Boolean!
+}
+
+extend type Query {
+    getAllCourseActive: [Course!]
+    getAllCourseActivePage(pageable: CustomPageable): CoursePage!
+}
+
+
+extend type Mutation{
+    createCourse(course: CourseCreate!): Course
+    updateCourse(course: CourseUpdate!): Course
+    deleteCourse(id: ID!): Boolean
+}
