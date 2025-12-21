@@ -1,5 +1,6 @@
 package com.react.auth.dto;
 
+import com.react.model.user.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthenticationResponse {
     private String token;
-    private String role;
+    private UserRole role;
     private String refreshToken;
 }

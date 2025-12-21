@@ -64,6 +64,6 @@ public class RefreshTokenService {
 
     @Transactional
     public void revokeAllByUser(Long userId) {
-        repo.deleteByAllByUserId(userId);
+        repo.deleteAllByUserId(userId);
     }
 }

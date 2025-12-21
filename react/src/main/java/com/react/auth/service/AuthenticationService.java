@@ -1,14 +1,20 @@
 package com.react.auth.service;
 
+import com.react.auth.dto.AuthenticationRequest;
 import com.react.auth.dto.AuthenticationResponse;
 import com.react.auth.dto.RegisterRequest;
+import com.react.auth.model.RefreshToken;
 import com.react.model.user.User;
 import com.react.model.user.UserRole;
 import com.react.repository.user.IUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 
@@ -48,7 +54,6 @@ public class AuthenticationService {
         );
     }
 
-    // ================= LOGIN =================
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
         try {
@@ -84,7 +89,6 @@ public class AuthenticationService {
         );
     }
 
-    // ================= LOGOUT =================
     public void logout(String refreshToken) {
         refreshTokenService.revokeByToken(refreshToken);
     }

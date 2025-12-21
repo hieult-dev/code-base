@@ -16,6 +16,7 @@ public class CourseService implements IService<Course, CourseDTO, Long> {
 
     @Autowired
     private ICourseRepository courseRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
