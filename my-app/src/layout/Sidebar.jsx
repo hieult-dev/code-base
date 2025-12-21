@@ -17,7 +17,7 @@ export default function Sidebar() {
             <nav style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
 
                 <NavLink
-                    to="/"
+                    to="/home"
                     end
                     style={({ isActive }) => ({
                         color: '#fff',

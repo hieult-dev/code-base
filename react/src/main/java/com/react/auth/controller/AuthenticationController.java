@@ -1,9 +1,6 @@
 package com.react.auth.controller;
 
-import com.react.auth.dto.AuthenticationRequest;
-import com.react.auth.dto.AuthenticationResponse;
-import com.react.auth.dto.RefreshRequest;
-import com.react.auth.dto.RegisterRequest;
+import com.react.auth.dto.*;
 import com.react.auth.service.AuthenticationService;
 import com.react.auth.service.JwtService;
 import com.react.auth.service.RefreshTokenService;
@@ -13,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -63,5 +57,13 @@ public class AuthenticationController {
                         rotated.getToken()
                 )
         );
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(
+            @RequestBody LogoutRequest request
+    ) {
+        refreshTokenService.revokeByToken(request.getRefreshToken());
+        return ResponseEntity.ok().build();
     }
 }
