@@ -1,9 +1,9 @@
-package com.react.service.course;
+package com.react.course.service;
 
-import com.react.dto.course.CourseDTO;
-import com.react.model.course.Course;
-import com.react.repository.course.ICourseRepository;
-import com.react.service.IService;
+import com.react.course.dto.CourseDTO;
+import com.react.course.entity.Course;
+import com.react.course.repository.ICourseRepository;
+import com.react.common.IService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

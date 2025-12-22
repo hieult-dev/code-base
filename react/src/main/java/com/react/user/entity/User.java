@@ -1,4 +1,4 @@
-package com.react.model.user;
+package com.react.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

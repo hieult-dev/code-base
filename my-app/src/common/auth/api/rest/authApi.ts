@@ -5,8 +5,9 @@ import baseApi from "./baseApi";
 import type { UserLoginResponse } from "../../../model/User";
 
 type TokenRefresh = {
-    accessToken: string,
-    refreshToken: string
+    token: string,
+    refreshToken: string,
+    role: string
 };
 
 function login(email: string, password: string, otpCode: string | undefined) {
@@ -49,8 +50,9 @@ async function refreshToken(): Promise<void> {
             );
 
             if (rs) {
-                authStore.setAuthentication(`Bearer ${rs.accessToken}`);
+                authStore.setAuthentication(`Bearer ${rs.token}`);
                 authStore.setRefreshToken(rs.refreshToken);
+                authStore.setUserRole(rs.role);
             }
         } finally {
             refreshPromise = null;

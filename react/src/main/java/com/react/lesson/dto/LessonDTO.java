@@ -1,6 +1,5 @@
-package com.react.dto.lesson;
+package com.react.lesson.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDateTime;

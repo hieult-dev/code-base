@@ -1,5 +1,5 @@
 package com.react.auth.service;
-import com.react.model.user.User;
+import com.react.user.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -48,7 +48,7 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
 
         if (userDetails instanceof User user) {
-            claims.put("role", user.getRole().name()); // ADMIN / STUDENT
+            claims.put("role", user.getRole().name());
         }
         return generateToken(claims, userDetails);
     }

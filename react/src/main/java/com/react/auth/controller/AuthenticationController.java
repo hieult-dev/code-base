@@ -4,15 +4,12 @@ import com.react.auth.dto.*;
 import com.react.auth.service.AuthenticationService;
 import com.react.auth.service.JwtService;
 import com.react.auth.service.RefreshTokenService;
-import com.react.model.user.User;
-import com.react.model.user.UserRole;
+import com.react.user.entity.User;
+import com.react.user.repository.IUserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,7 +20,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final RefreshTokenService refreshTokenService;
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    private final IUserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -46,17 +43,16 @@ public class AuthenticationController {
 
         var rotated = refreshTokenService.rotate(req.getRefreshToken());
 
-        UserDetails userDetails =
-                userDetailsService.loadUserByUsername(
-                        rotated.getUserId().toString()
-                );
+        User user = userRepository
+                .findById(rotated.getUserId())
+                .orElseThrow();
 
-        String access = jwtService.generateToken(userDetails);
+        String accessToken = jwtService.generateToken(user);
 
         return ResponseEntity.ok(
                 new AuthenticationResponse(
-                        access,
-                        UserRole.STUDENT,
+                        accessToken,
+                        user.getRole(),
                         rotated.getToken()
                 )
         );

@@ -1,8 +1,7 @@
-package com.react.api.rest.course;
+package com.react.course.controller;
 
-import com.react.dto.course.CourseDTO;
-import com.react.model.course.Course;
-import com.react.service.course.CourseService;
+import com.react.course.dto.CourseDTO;
+import com.react.course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

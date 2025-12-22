@@ -5,7 +5,7 @@ import { useUserStore } from '../../../store/user';
 import { resetStoreAndRedirectToLogin } from '../../../service/reset_store';
 import { refreshToken } from './authApi';
 
-export const REFRESH_TOKEN_URL = `${GATEWAY_URL}/auth/refreshToken`;
+export const REFRESH_TOKEN_URL = `${GATEWAY_URL}/api/auth/refreshToken`;
 const LOGIN_URL = `${GATEWAY_URL}/api/auth/authenticate`;
 
 export function initialClient(

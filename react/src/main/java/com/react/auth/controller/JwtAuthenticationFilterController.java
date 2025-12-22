@@ -68,6 +68,7 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
                     Claims claims = jwtService.extractAllClaims(jwt);
                     String role = claims.get("role", String.class);
 
+                    // bị sai ở case admin đổi quyền nhưng token vẫn sống => sai quyền
                     List<GrantedAuthority> authorities =
                             List.of(new SimpleGrantedAuthority("ROLE_" + role));
 

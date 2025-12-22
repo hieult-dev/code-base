@@ -1,6 +1,6 @@
-package com.react.repository.user;
+package com.react.user.repository;
 
-import com.react.model.user.User;
+import com.react.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.react.auth.dto;
 
-import com.react.model.user.UserRole;
+import com.react.user.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.react.model.course;
+package com.react.lesson.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,29 +8,28 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "lessons")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class Lesson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "course_id", nullable = false)
+    private Long courseId;
+
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
+    @Column(name = "video_url")
+    private String videoUrl;
 
-    private Double price = 0.0;
+    @Column(name = "lesson_order")
+    private Integer lessonOrder;
 
-    @Column(name = "instructor_id")
-    private String instructorId;
-
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
-
-    // getters & setters
 }

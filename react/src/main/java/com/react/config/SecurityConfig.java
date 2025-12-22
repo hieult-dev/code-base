@@ -2,7 +2,7 @@ package com.react.config;
 
 import com.react.auth.controller.JwtAuthenticationFilterController;
 import com.react.auth.service.JwtService;
-import com.react.repository.user.IUserRepository;
+import com.react.user.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.react.model.enrollment;
+package com.react.enrollment.entity;
 
 import jakarta.persistence.*;
 

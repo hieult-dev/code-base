@@ -1,6 +1,6 @@
-package com.react.dto.user;
+package com.react.user.dto;
 
-import com.react.model.user.UserRole;
+import com.react.user.entity.UserRole;
 import lombok.Data;
 
 import java.time.LocalDateTime;

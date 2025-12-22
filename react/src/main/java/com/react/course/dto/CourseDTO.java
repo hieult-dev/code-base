@@ -1,4 +1,4 @@
-package com.react.dto.course;
+package com.react.course.dto;
 
 import lombok.Data;
 

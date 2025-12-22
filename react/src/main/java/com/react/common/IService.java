@@ -1,4 +1,4 @@
-package com.react.service;
+package com.react.common;
 
 import java.util.List;
 import java.util.Optional;

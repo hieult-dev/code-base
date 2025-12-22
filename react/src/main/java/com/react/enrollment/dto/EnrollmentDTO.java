@@ -1,6 +1,5 @@
-package com.react.dto.enrollment;
+package com.react.enrollment.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDateTime;
