@@ -1,4 +1,5 @@
 package com.react.auth.service;
+import com.react.model.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -43,7 +45,12 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(Map.of(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+
+        if (userDetails instanceof User user) {
+            claims.put("role", user.getRole().name()); // ADMIN / STUDENT
+        }
+        return generateToken(claims, userDetails);
     }
 
     private String generateToken(
@@ -53,7 +60,7 @@ public class JwtService {
         long now = System.currentTimeMillis();
 
         return Jwts.builder()
-                .setClaims(extraClaims)            // ghi đè claims nếu trùng key
+                .setClaims(extraClaims)
                 .setSubject(userDetail.getUsername())
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + accessExpMs))
@@ -67,7 +74,7 @@ public class JwtService {
     }
 
     // Tách token: Header.Payload.Signature
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())

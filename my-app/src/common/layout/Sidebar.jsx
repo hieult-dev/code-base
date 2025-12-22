@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-
+import LogoutButton from '../pages/Logout';
 export default function Sidebar() {
     return (
         <aside
@@ -55,7 +55,7 @@ export default function Sidebar() {
                 >
                     About
                 </NavLink>
-
+                <LogoutButton />
             </nav>
         </aside>
     )

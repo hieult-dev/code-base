@@ -4,10 +4,13 @@ import com.react.auth.dto.*;
 import com.react.auth.service.AuthenticationService;
 import com.react.auth.service.JwtService;
 import com.react.auth.service.RefreshTokenService;
+import com.react.model.user.User;
 import com.react.model.user.UserRole;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
@@ -59,11 +62,18 @@ public class AuthenticationController {
         );
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public ResponseEntity<?> logout(
             @RequestBody LogoutRequest request
     ) {
         refreshTokenService.revokeByToken(request.getRefreshToken());
         return ResponseEntity.ok().build();
+    }
+
+    // log out all device
+    @PostMapping("/logout-all")
+    public void logoutAll(Authentication auth) {
+        Long userId = ((User) auth.getPrincipal()).getId();
+        refreshTokenService.revokeAllByUser(userId);
     }
 }

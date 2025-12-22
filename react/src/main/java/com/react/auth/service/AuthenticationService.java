@@ -45,7 +45,7 @@ public class AuthenticationService {
 
         String accessToken = jwtService.generateToken(user);
         RefreshToken refreshToken =
-                refreshTokenService.create(user.getId().intValue());
+                refreshTokenService.create(user.getId());
 
         return new AuthenticationResponse(
                 accessToken,
@@ -80,7 +80,7 @@ public class AuthenticationService {
 
         String accessToken = jwtService.generateToken(user);
         RefreshToken refreshToken =
-                refreshTokenService.create(user.getId().intValue());
+                refreshTokenService.create(user.getId());
 
         return new AuthenticationResponse(
                 accessToken,

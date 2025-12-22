@@ -24,7 +24,7 @@ public class RefreshTokenService {
     }
 
     @Transactional
-    public RefreshToken create(Integer userId) {
+    public RefreshToken create(Long userId) {
         String token = UUID.randomUUID().toString();
         Instant expiry = Instant.now().plusMillis(refreshExpMs);
 

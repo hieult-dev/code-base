@@ -24,7 +24,7 @@ public class RefreshToken {
     private String token;
 
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "expiry_at", nullable = false)
     private Instant expiryAt;

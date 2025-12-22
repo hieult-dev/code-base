@@ -1,16 +1,17 @@
-import { useRoutes, Navigate  } from 'react-router-dom';
+import { useRoutes, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
-import UserInfo from '../pages/UserInfo';
+import UserInfo from '../../apps/user/UserInfo';
 import About from '../pages/About';
 import Login from '../pages/Login';
 import MainLayout from '../layout/MainLayout';
+import { useUserStore } from '../store/user';
 
 export default function AppRouter() {
-  const isLoggedIn = !!localStorage.getItem("accessToken");
+  const isLoggedIn = !!useUserStore(state => state.authentication);
   const routes = useRoutes([
     {
       path: '/login',
-      element: isLoggedIn ? <Navigate to="/" /> : <Login />
+      element: isLoggedIn ? <Navigate to="/home" /> : <Login />
     },
     {
       path: '/',

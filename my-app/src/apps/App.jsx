@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
-import AppRouter from '../router/AppRouter'
+import AppRouter from '../common/router/AppRouter'
 import AppProvider from './AppProvider'
 
 export default function App() {

@@ -1,4 +1,4 @@
-import { UserContext } from '../context/UserContext.js'
+import { UserContext } from './context/UserContext.js'
 import { useContext } from 'react'
 import { useLocation } from 'react-router-dom';
 

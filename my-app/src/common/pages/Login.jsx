@@ -2,12 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/Login.css";
 
+import { login } from "../auth/api/rest/authApi"
+import { useUserStore } from "../store/user";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+  const { setAuthentication, setRefreshToken, setUserRole } = useUserStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,32 +20,14 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:8080/api/auth/authenticate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const res = await login(email, password, undefined);
 
-      if (!res.ok) {
-        throw new Error("Invalid email or password");
-      }
-
-      const data = await res.json();
-
-      // ✅ LƯU TOKEN
-      localStorage.setItem("accessToken", data.token);
-      localStorage.setItem("role", data.role);
-      localStorage.setItem("refreshToken", data.refreshToken);
-
-      // ✅ CHUYỂN TRANG
-      navigate("/");
+      setAuthentication(`Bearer ${res.token}`);
+      setRefreshToken(res.refreshToken);
+      setUserRole(res.role);
+      navigate("/home", { replace: true });
     } catch (err) {
-      setError(err.message);
+      setError(err?.message || "Invalid email or password");
     } finally {
       setLoading(false);
     }

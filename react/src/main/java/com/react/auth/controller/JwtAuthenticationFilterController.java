@@ -2,6 +2,7 @@ package com.react.auth.controller;
 
 import com.react.auth.service.JwtService;
 import com.react.auth.util.ResponseUtil;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -13,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilterController extends OncePerRequestFilter {
@@ -52,10 +56,8 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
         }
 
         String jwt = authHeader.substring(7);
-
+        String userEmail = jwtService.extractUserName(jwt);
         try {
-            String userEmail = jwtService.extractUserName(jwt);
-
             if (SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 UserDetails userDetails =
@@ -63,11 +65,17 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
 
                 if (jwtService.isTokenValid(jwt, userDetails)) {
 
+                    Claims claims = jwtService.extractAllClaims(jwt);
+                    String role = claims.get("role", String.class);
+
+                    List<GrantedAuthority> authorities =
+                            List.of(new SimpleGrantedAuthority("ROLE_" + role));
+
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
                                     null,
-                                    userDetails.getAuthorities()
+                                    authorities
                             );
 
                     authToken.setDetails(
@@ -75,14 +83,6 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
                     );
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-
-                } else {
-                    ResponseUtil.writeError(
-                            response,
-                            HttpServletResponse.SC_UNAUTHORIZED,
-                            "INVALID_TOKEN"
-                    );
-                    return;
                 }
             }
 
