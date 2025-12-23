@@ -1,3 +1,10 @@
 1. create repo in docker hub
 2. docker tag spring-backend lehieu153/spring-backend:latest(tạo tag cho images spring-backend)
 3. docker push lehieu153/spring-backend:latest (push vào repo)
+
+
+// for other user run prj
+1. Download docker
+2. Open cmd on file docker-compose.yml -> docker compose up -d
+3. Open http://localhost:5173
+
