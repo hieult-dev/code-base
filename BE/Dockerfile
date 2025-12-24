@@ -1,11 +1,37 @@
-# 1️⃣ Dùng Java 17 (phù hợp Spring Boot)
-FROM eclipse-temurin:17-jdk
+# ===============================
+# 1️⃣ Stage build: dùng Maven + JDK 17 để build
+# ===============================
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 
-# 2️⃣ Thư mục làm việc trong container
+# Thư mục làm việc
 WORKDIR /app
 
-# 3️⃣ Copy file jar từ máy vào container
-COPY target/react-0.0.1-SNAPSHOT.jar app.jar
+# Copy pom.xml trước để cache dependency
+COPY pom.xml .
 
-# 4️⃣ Chạy app khi container start
+# Download dependency trước (tối ưu cache)
+RUN mvn dependency:go-offline -B
+
+# Copy source code
+COPY src ./src
+
+# Build jar (skip test cho nhanh)
+RUN mvn clean package -DskipTests
+
+
+# ===============================
+# 2️⃣ Stage runtime: JRE nhẹ
+# ===============================
+FROM eclipse-temurin:17-jre-alpine
+
+# Thư mục chạy app
+WORKDIR /app
+
+# Copy jar từ stage build
+COPY --from=build /app/target/*jar app.jar
+
+# Mở cổng Spring Boot (đổi nếu bạn dùng cổng khác)
+EXPOSE 8080
+
+# Chạy Spring Boot
 ENTRYPOINT ["java", "-jar", "app.jar"]

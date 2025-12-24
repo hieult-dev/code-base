@@ -1,17 +1,40 @@
-# 1. Dùng nginx nhẹ
+# ===============================
+# 1️⃣ Stage build: dùng Node để build Vite
+# ===============================
+FROM node:20-alpine AS build
+
+# Thư mục làm việc
+WORKDIR /app
+
+# Copy file khai báo dependency trước (tối ưu cache)
+COPY package*.json ./
+
+# Cài dependency
+RUN npm install
+
+# Copy toàn bộ source code
+COPY . .
+
+# Build Vite (ra thư mục dist)
+RUN npm run build
+
+
+# ===============================
+# 2️⃣ Stage runtime: nginx nhẹ
+# ===============================
 FROM nginx:alpine
 
-# 2. Xóa config mặc định
+# Xóa config mặc định
 RUN rm /etc/nginx/conf.d/default.conf
 
-# 3. Copy config nginx của ta
+# Copy nginx config của bạn
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# 4. Copy build Vite (dist) vào nginx
-COPY dist /usr/share/nginx/html
+# Copy dist từ stage build sang nginx
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# 5. Mở cổng 80
+# Mở cổng 80
 EXPOSE 80
 
-# 6. Chạy nginx
+# Chạy nginx
 CMD ["nginx", "-g", "daemon off;"]
