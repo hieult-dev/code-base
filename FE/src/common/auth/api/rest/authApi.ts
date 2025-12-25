@@ -42,6 +42,8 @@ async function refreshToken(): Promise<void> {
         return refreshPromise;
     }
 
+    authStore.setRefreshingToken(true);
+
     refreshPromise = (async () => {
         try {
             const rs = await baseApi.post<TokenRefresh>(
@@ -55,6 +57,7 @@ async function refreshToken(): Promise<void> {
                 authStore.setUserRole(rs.role);
             }
         } finally {
+            authStore.setRefreshingToken(false);
             refreshPromise = null;
         }
     })();

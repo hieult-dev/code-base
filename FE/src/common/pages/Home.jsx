@@ -1,13 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { fetchCourses } from '../../apps/course/api/course-api-rest';
+import { fetchCourses } from '@/apps/course/api/course-api-rest';
 import '../assets/Home.css'
-import CourseCard from '../../apps/course/components/CourseCard';
+import CourseCard from '@/apps/course/components/CourseCard';
+import { useUserStore } from '@/common/store/user';
+
 export default function Home() {
     const [courses, setCourses] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-
+    const isRefreshingToken = useUserStore(
+        (state) => state.isRefreshingToken
+    );
     useEffect(() => {
         const loadCourses = async () => {
             try {
@@ -24,12 +28,12 @@ export default function Home() {
         loadCourses()
     }, [])
 
-    if (loading) {
-        return <p>Loading courses...</p>
+    if (loading || isRefreshingToken) {
+        return <p>Loading courses...</p>;
     }
 
-    if (error) {
-        return <p style={{ color: 'red' }}>{error}</p>
+    if (error && !isRefreshingToken) {
+        return <p style={{ color: 'red' }}>{error}</p>;
     }
 
     return (

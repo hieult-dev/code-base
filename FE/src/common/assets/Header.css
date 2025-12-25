@@ -1,0 +1,36 @@
+.layout-header {
+    height: 60px;
+    background-color: #1f2937;
+    color: #ffffff;
+}
+
+.layout-header__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+}
+
+.layout-header__title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.layout-header__admin-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    width: fit-content;
+     display: inline-flex; 
+}
+
+.layout-header__admin-btn:hover {
+    background-color: #1d4ed8;
+}

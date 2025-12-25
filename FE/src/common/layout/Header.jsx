@@ -1,21 +1,29 @@
+import '@/common/assets/Header.css'
+import {UserRole} from '@/apps/user/model/User'
+import { useNavigate } from 'react-router-dom'
+import { useUserStore } from "../store/user";
+
 export default function Header() {
+    const navigate = useNavigate()
+    const userRole = useUserStore((state) => state.userRole)
+    const isAdmin = userRole === UserRole.ADMIN
+
     return (
-        <header
-            style={{
-                height: '60px',
-                background: '#1f2937',
-                color: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 20px',
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                zIndex: 1000
-            }}
-        >
-            <h3>🚀 My App</h3>
+        <header className="layout-header">
+            <div className="layout-header__inner">
+                <h3 className="layout-header__title">
+                    My first app with React
+                </h3>
+
+                {isAdmin && (
+                    <button
+                        className="layout-header__admin-btn"
+                        onClick={() => navigate('/admin')}
+                    >
+                        To Admin Page
+                    </button>
+                )}
+            </div>
         </header>
     )
 }

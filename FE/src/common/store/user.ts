@@ -8,8 +8,10 @@ interface AuthState {
     refreshToken: string;
     expired?: Date;
     userRole: string;
+    isRefreshingToken: boolean;
 
     setUser: (user: User) => void;
+    setRefreshingToken: (value: boolean) => void;
     setUserRole: (userRole: string) => void;
     setAuthentication: (token: string) => void;
     setRefreshToken: (token: string) => void;
@@ -30,6 +32,7 @@ export const useUserStore = create(
             userRole: '',
             refreshToken: '',
             expired: undefined,
+            isRefreshingToken: false,
 
             setUser: (user) =>
                 set({
@@ -56,12 +59,18 @@ export const useUserStore = create(
                     userRole: '',
                     refreshToken: '',
                     expired: undefined,
+                    isRefreshingToken: false,
                 }),
 
             setUserRole: (userRole) =>
                 set({
                     userRole,
                     expired: getExpiredDate(),
+                }),
+
+            setRefreshingToken: (value: boolean) =>
+                set({
+                    isRefreshingToken: value,
                 }),
         }),
         {

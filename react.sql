@@ -94,3 +94,7 @@ VALUES
 ('DevOps Căn Bản', 'CI/CD với Docker và GitHub Actions', 899000, 5),
 ('Kotlin Backend', 'Xây dựng backend với Kotlin Spring', 799000, 2),
 ('System Design Cơ Bản', 'Thiết kế hệ thống cho developer', 999000, 6);
+
+ALTER TABLE react.users
+MODIFY role ENUM('STUDENT', 'INSTRUCTOR', 'ADMIN');
+UPDATE `react`.`users` SET `role` = 'ADMIN' WHERE (`id` = '3');
