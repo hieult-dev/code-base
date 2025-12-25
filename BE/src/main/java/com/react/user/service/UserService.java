@@ -13,11 +13,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserService implements IService<User, UserDTO, Long> {
 
     private final IUserRepository userRepository;
     private final UserMapper userMapper;
+
+    public UserService(IUserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+    }
 
     @Override
     public List<UserDTO> getAll() {

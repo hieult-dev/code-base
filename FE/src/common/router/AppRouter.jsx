@@ -11,12 +11,16 @@ export default function AppRouter() {
   const routes = useRoutes([
     {
       path: '/login',
-      element: isLoggedIn ? <Navigate to="/home" /> : <Login />
+      element: <Login />
     },
     {
       path: '/',
-      element: isLoggedIn ? <MainLayout /> : <Navigate to="/login" />,
+      element: <MainLayout />,
       children: [
+        {
+          index: true,
+          element: <Home />
+        },
         { path: 'home', element: <Home /> },
         { path: 'user', element: <UserInfo /> },
         { path: 'about', element: <About /> }

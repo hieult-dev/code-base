@@ -55,10 +55,9 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-
-        String jwt = authHeader.substring(7);
-        String userEmail = jwtService.extractUserName(jwt);
         try {
+            String jwt = authHeader.substring(7);
+            String userEmail = jwtService.extractUserName(jwt);
             if (SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 UserDetails userDetails =
@@ -90,7 +89,8 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
 
-        } catch (ExpiredJwtException e) {
+        }
+        catch (ExpiredJwtException e) {
             ResponseUtil.writeError(
                     response,
                     HttpServletResponse.SC_UNAUTHORIZED,

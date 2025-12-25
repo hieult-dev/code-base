@@ -53,7 +53,7 @@ export function initialClient(
                 }
 
                 // Access token expired
-                if (err.response.status === 403 && !originalConfig._retry) {
+                if (err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
                     try {
                         await refreshToken();
@@ -118,12 +118,79 @@ export async function request<T>(
     }
 }
 
+function downloadWithFullResponse(path: string, data?: object, config?: AxiosRequestConfig) {
+    const client = initialClient(false, true, true);
+    return client.post(path, data, config);
+}
+
+function downloadWithFullResponseWithGetMethod(path: string, config?: AxiosRequestConfig) {
+    const client = initialClient(false, true, true);
+    return client.get(path, config);
+}
+
+function postForDownload(path: string, data: object | undefined, config?: AxiosRequestConfig) {
+    const client = initialClient(false, true, true);
+    return client.post(path, data, config);
+}
 
 function post<T>(path: string, data: object | undefined, config?: AxiosRequestConfig) {
     return request<T>('post', path, data, false, false, false, config);
 }
 
+function get<T>(path: string, config?: AxiosRequestConfig) {
+    return request<T>('get', path, undefined, false, false, false, config);
+}
+
+function getWithFile<T>(path: string, config?: AxiosRequestConfig) {
+    return request<T>('get', path, undefined, false, true, false, config);
+}
+
+function put<T>(path: string, data: object | undefined, config?: AxiosRequestConfig) {
+    return request<T>('put', path, data, false, true, false, config);
+}
+
+function del<T>(path: string, data: object | undefined, config?: AxiosRequestConfig) {
+    return request<T>('delete', path, data, false, false, false, config);
+}
+
+function postWithFile<T>(path: string, data: object | FormData | undefined, config?: AxiosRequestConfig) {
+    return request<T>('post', path, data, true, false, false, config);
+}
+
+function putWithFile<T>(path: string, data: object | FormData | undefined, config?: AxiosRequestConfig) {
+    return request<T>('put', path, data, true, false, false, config);
+}
+
+function download<T>(path: string, data: object | undefined, config?: AxiosRequestConfig) {
+    return request<T>('post', path, data, false, true, true, config);
+}
+
+function downloadWithGet<T>(path: string, config?: AxiosRequestConfig) {
+    return request<T>('get', path, undefined, false, true, true, config);
+}
+
+function sync<T>(path: string, data: object | undefined, config?: AxiosRequestConfig) {
+    return request<T>('post', path, data, false, false, true, config);
+}
+
+function syncWithFile<T>(path: string, data: FormData, config?: AxiosRequestConfig) {
+    return request<T>('post', path, data, true, false, true, config);
+}
+
 export default {
+    del,
+    download,
+    downloadWithGet,
+    downloadWithFullResponse,
+    get,
+    getWithFile,
     post,
-    request
+    postWithFile,
+    putWithFile,
+    put,
+    request,
+    sync,
+    syncWithFile,
+    downloadWithFullResponseWithGetMethod,
+    postForDownload
 };

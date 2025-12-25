@@ -36,7 +36,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @PostMapping("/refresh")
+    @PostMapping("/refreshToken")
     public ResponseEntity<AuthenticationResponse> refresh(
             @RequestBody RefreshRequest req
     ) {

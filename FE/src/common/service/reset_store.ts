@@ -5,5 +5,5 @@ export function resetStoreAndRedirectToLogin() {
     window.location.replace('/login');
 }
 export function resetStore() {
-    useUserStore().resetUserStore();
+    useUserStore.getState().resetUserStore();
 }
