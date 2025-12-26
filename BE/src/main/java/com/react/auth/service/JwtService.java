@@ -21,7 +21,7 @@ public class JwtService {
 
     public JwtService(
             @Value("${jwt.secret-key}") String secretKey,
-            @Value("${app.jwt.access-exp-ms:60000}") long accessExpMs
+            @Value("${app.jwt.access-exp-ms:900000}") long accessExpMs
     ) {
         this.secretKey = secretKey;
         this.accessExpMs = accessExpMs;

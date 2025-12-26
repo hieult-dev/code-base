@@ -1,5 +1,5 @@
 import '@/common/assets/Header.css'
-import {UserRole} from '@/apps/user/model/User'
+import { UserRole } from '@/apps/user/model/User'
 import { useNavigate } from 'react-router-dom'
 import { useUserStore } from "../store/user";
 
@@ -18,7 +18,7 @@ export default function Header() {
                 {isAdmin && (
                     <button
                         className="layout-header__admin-btn"
-                        onClick={() => navigate('/admin')}
+                        onClick={() => navigate('/admin/course')}
                     >
                         To Admin Page
                     </button>

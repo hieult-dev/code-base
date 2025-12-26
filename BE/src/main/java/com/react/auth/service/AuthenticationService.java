@@ -15,7 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+import com.react.auth.exception.LoginException;
 import java.time.LocalDateTime;
 
 @Service
@@ -64,8 +64,8 @@ public class AuthenticationService {
                     )
             );
         } catch (BadCredentialsException ex) {
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED,
+            throw new LoginException(
+                    "WrongPassOrEmail",
                     "Sai email hoặc mật khẩu"
             );
         }

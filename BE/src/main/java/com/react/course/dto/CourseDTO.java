@@ -12,4 +12,5 @@ public class CourseDTO {
     private Double price = 0.0;
     private String instructorId;
     private LocalDateTime createdAt = LocalDateTime.now();
+    private Boolean active;
 }

@@ -2,6 +2,7 @@ package com.react.course.service;
 
 import com.react.course.dto.CourseDTO;
 import com.react.course.entity.Course;
+import com.react.course.exception.CourseNotFound;
 import com.react.course.repository.ICourseRepository;
 import com.react.common.IService;
 import org.modelmapper.ModelMapper;
@@ -21,6 +22,13 @@ public class CourseService implements IService<Course, CourseDTO, Long> {
 
     @Override
     public List<CourseDTO> getAll() {
+        return courseRepository.getAllForUser()
+                .stream()
+                .map(c -> modelMapper.map(c, CourseDTO.class))
+                .toList();
+    }
+
+    public List<CourseDTO> getAllForAdmin() {
         return courseRepository.findAll()
                 .stream()
                 .map(c -> modelMapper.map(c, CourseDTO.class))
@@ -44,6 +52,11 @@ public class CourseService implements IService<Course, CourseDTO, Long> {
 
     @Override
     public void delete(Long aLong) {
+    }
 
+    public CourseDTO getCourseById(Long id) {
+        return courseRepository.getCourseById(id)
+                .map(course -> modelMapper.map(course, CourseDTO.class))
+                .orElseThrow(() -> new CourseNotFound("CourseNotFound", "Course Not Found!"));
     }
 }

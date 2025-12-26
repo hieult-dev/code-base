@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,12 +28,18 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @Component
 public class JwtAuthenticationFilterController extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+
+    @Autowired
+    public JwtAuthenticationFilterController(JwtService jwtService, UserDetailsService userDetailsService) {
+        this.jwtService = jwtService;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -48,8 +55,11 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-
+        System.out.println("=== JWT FILTER START ===");
+        System.out.println("URI: " + request.getRequestURI());
+        System.out.println("Method: " + request.getMethod());
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization header: " + authHeader);
 
         if (authHeader == null || authHeader.isBlank() || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -101,12 +111,6 @@ public class JwtAuthenticationFilterController extends OncePerRequestFilter {
                     response,
                     HttpServletResponse.SC_UNAUTHORIZED,
                     "INVALID_TOKEN"
-            );
-        } catch (Exception e) {
-            ResponseUtil.writeError(
-                    response,
-                    HttpServletResponse.SC_UNAUTHORIZED,
-                    "UNAUTHORIZED"
             );
         }
     }

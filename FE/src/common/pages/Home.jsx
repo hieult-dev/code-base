@@ -39,7 +39,6 @@ export default function Home() {
     return (
         <div className="home">
             <h1 className="page-title">Courses</h1>
-
             <div className="course-grid">
                 {Array.isArray(courses) &&
                     courses.map((course) => {

@@ -5,4 +5,5 @@ export default interface ICourse {
     price: number
     instructorId: number
     createdAt: string
+    active: boolean
 }

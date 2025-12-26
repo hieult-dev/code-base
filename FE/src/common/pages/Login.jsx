@@ -27,7 +27,7 @@ export default function Login() {
       setUserRole(res.role);
       navigate("/home", { replace: true });
     } catch (err) {
-      setError(err?.message || "Invalid email or password");
+      setError(err?.message);
     } finally {
       setLoading(false);
     }

@@ -72,7 +72,7 @@ public class RestExceptionHandler {
                 .status(HttpStatus.PRECONDITION_FAILED)
                 .body(new ErrorPayload(
                         "VALIDATION_ERROR",
-                        "Validation failed",
+                        "Vui lòng nhập đúng định dạng",
                         errors
                 ));
     }

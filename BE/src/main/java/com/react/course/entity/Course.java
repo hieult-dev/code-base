@@ -32,5 +32,6 @@ public class Course {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // getters & setters
+    @Column(name = "active")
+    private Boolean active;
 }

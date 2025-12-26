@@ -85,16 +85,23 @@ VALUES (2, 1, 5, 'Khóa học rất dễ hiểu');
 INSERT INTO courses (title, description, price, instructor_id)
 VALUES
 ('MySQL Nâng Cao', 'Tối ưu truy vấn và index MySQL', 699000, 1),
-('Spring Boot Cơ Bản', 'Xây dựng REST API với Spring Boot', 799000, 2),
+('Spring Boot Cơ Bản', 'Xây dựng REST API với Spring Boot', 799000, 1),
 ('Spring Security', 'Bảo mật ứng dụng với Spring Security', 899000, 2),
-('React Cơ Bản', 'Học React từ cơ bản đến thực hành', 599000, 3),
-('React Nâng Cao', 'Hook, Performance và Best Practices', 799000, 3),
-('Vue 3 + TypeScript', 'Xây dựng SPA với Vue 3 và TS', 699000, 4),
-('Docker Cho Người Mới', 'Docker từ cơ bản đến triển khai', 649000, 5),
-('DevOps Căn Bản', 'CI/CD với Docker và GitHub Actions', 899000, 5),
-('Kotlin Backend', 'Xây dựng backend với Kotlin Spring', 799000, 2),
-('System Design Cơ Bản', 'Thiết kế hệ thống cho developer', 999000, 6);
+('React Cơ Bản', 'Học React từ cơ bản đến thực hành', 599000, 1),
+('React Nâng Cao', 'Hook, Performance và Best Practices', 799000, 1),
+('Vue 3 + TypeScript', 'Xây dựng SPA với Vue 3 và TS', 699000, 1),
+('Docker Cho Người Mới', 'Docker từ cơ bản đến triển khai', 649000, 1),
+('DevOps Căn Bản', 'CI/CD với Docker và GitHub Actions', 899000, 1),
+('Kotlin Backend', 'Xây dựng backend với Kotlin Spring', 799000, 1),
+('System Design Cơ Bản', 'Thiết kế hệ thống cho developer', 999000, 1);
 
 ALTER TABLE react.users
 MODIFY role ENUM('STUDENT', 'INSTRUCTOR', 'ADMIN');
 UPDATE `react`.`users` SET `role` = 'ADMIN' WHERE (`id` = '3');
+
+
+UPDATE react.courses
+SET active = TRUE;
+UPDATE react.courses
+SET active = FALSE
+WHERE id IN (12, 14, 18);
