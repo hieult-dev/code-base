@@ -1,0 +1,15 @@
+.layout-light {
+    --v-body-bg: #ffffff;
+    --v-sidebar-bg: #ffffff;
+    --v-sidebar-hover-bg: var(--surface-hover);
+    --v-menuitem-text-color-secondary: var(--text-color-secondary);
+    --v-menuitem-active: var(--primary-light-color);
+    --v-menuitem-text-color: var(--text-color);
+    --v-menuitem-hover-bg: var(--surface-hover);
+    --v-overlay-menuitem-text-color: var(--text-color);
+    --v-overlay-menuitem-hover-bg: var(--surface-hover);
+    --v-topbar-search-button-bg: var(--surface-ground);
+    --v-topbar-search-button-icon-color: var(--v-menuitem-text-color-secondary);
+    --menuitem-text-color: var(--text-color);
+    --v-data-table-header-color: var(--primary-color);
+}

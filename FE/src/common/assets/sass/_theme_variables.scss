@@ -1,0 +1,37 @@
+$themes: (
+        "light": (
+                "primary":#2F71B3,
+                "actionIconHoverBg": #f6f9fc,
+                "authPanelBg": #eff3f8,
+                "inputBg": #fff,
+                "scrollbar":#d3dbe3,
+                "datatableHeader": #357EC7
+        ),
+        "dark": (
+                "primary":#3BABE8,
+                "actionIconHoverBg": rgba(255,255,255,.03),
+                "authPanelBg": #102a43,
+                "inputBg": #1c344b,
+                "scrollbar":rgba(255,255,255,.60),
+                "datatableHeader": #1c344b
+        )
+);
+
+@each $theme-name, $properties in $themes {
+  html[data-theme="#{$theme-name}"] {
+    // define a css variable for each property
+    @each $name, $property in $properties {
+      --#{$name}: #{$property};
+
+      @if ($name == "primary") {
+        --#{$name}-dark: #{darken($property, 10%)};
+        --#{$name}-darker: #{darken($property, 20%)};
+        --#{$name}-light-10: #{lighten($property, 10%)};
+        --#{$name}-light-20: #{lighten($property, 20%)};
+        --#{$name}-light-30: #{lighten($property, 30%)};
+        --#{$name}-light-40: #{lighten($property, 40%)};
+        --#{$name}-light-50: #{lighten($property, 50%)};
+      }
+    }
+  }
+}

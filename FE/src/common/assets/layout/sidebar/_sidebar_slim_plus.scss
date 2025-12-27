@@ -1,0 +1,178 @@
+@media screen and (min-width: $breakpoint) {
+  .layout-container {
+    &.layout-slim-plus {
+      .layout-topbar {
+        .app-logo {
+          //width: 5rem;
+          justify-content: center;
+          //span {
+          //    display: none;
+          //}
+        }
+
+        .topbar-menu {
+          margin: 0 2rem;
+        }
+      }
+
+      .topbar-menubutton {
+        display: none;
+      }
+
+      .layout-sidebar {
+        width: 7rem;
+        overflow: visible;
+
+        .layout-menu-container {
+          overflow: auto;
+          display: flex;
+          justify-content: center;
+          padding: 0;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+      }
+
+      .layout-content-wrapper {
+        margin-left: 7rem;
+      }
+
+      .layout-menu {
+        padding-top: .5rem;
+
+        ul {
+          display: none;
+        }
+
+        li.active-menuitem {
+          > ul {
+            display: block;
+          }
+        }
+
+        .layout-root-menuitem {
+          > .layout-menuitem-root-text {
+            display: none;
+          }
+
+          > a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            transition: background-color var(--transition-duration);
+            width: 6rem;
+            height: auto;
+            margin: 0 auto 1rem auto;
+            padding: 0.75rem 0;
+            color: var(--menuitem-text-color);
+            font-weight: 600;
+            position: relative;
+
+            &.active-menu, &.router-link-active {
+              background: var(--v-sidebar-hover-bg);
+              color: var(--v-menuitem-active);
+
+              &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -5px;
+                width: 5px;
+                height: 100%;
+                background: var(--v-menuitem-active);
+              }
+            }
+
+            &:hover {
+              background: var(--v-sidebar-hover-bg);
+            }
+
+            .layout-submenu-toggler {
+              display: none;
+            }
+
+            .layout-menuitem-icon {
+              font-size: 1.75rem;
+            }
+
+            .layout-menuitem-text {
+              font-size: 0.875rem;
+              display: block;
+              margin-top: 0.25rem;
+            }
+          }
+
+          > ul {
+            position: absolute;
+            left: 7rem;
+            top: 0;
+            min-width: 17rem;
+            background-color: var(--surface-overlay);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgb(0 0 0 / 3%), 0 0 2px rgb(0 0 0 / 6%), 0 2px 6px rgb(0 0 0 / 12%);
+            padding: 1rem;
+            max-height: 40rem;
+            overflow: auto;
+            z-index: 999;
+
+            a {
+              color: var(--v-overlay-menuitem-text-color);
+
+              &.active-route {
+                color: var(--v-menuitem-text-color);
+              }
+
+              &:hover {
+                background: var(--primary-400);
+                color: var(--v-menuitem-text-color);
+              }
+            }
+
+            li {
+              a {
+                padding-left: 0.5rem;
+              }
+
+              li {
+                a {
+                  padding-left: 1.5rem;
+                }
+
+                li {
+                  a {
+                    padding-left: 2.5rem;
+                  }
+
+                  li {
+                    a {
+                      padding-left: 3.5rem;
+                    }
+
+                    li {
+                      a {
+                        padding-left: 4.5rem;
+                      }
+
+                      li {
+                        a {
+                          padding-left: 5.5rem;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

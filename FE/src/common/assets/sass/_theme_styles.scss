@@ -1,0 +1,88 @@
+/* Add your customizations of theme here */
+
+.required-mark {
+  color: var(--red-500);
+}
+
+//scrollbar
+
+::-webkit-scrollbar-track {
+  background: var(--surface-a);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--surface-a);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+
+  &:hover {
+    background: var(--primary-600);
+  }
+}
+
+.layout-sidebar {
+  .layout-menu-container {
+    &::-webkit-scrollbar {
+      width: 0;
+      display: none;
+    }
+  }
+}
+
+a {
+  &:-webkit-any-link {
+    text-decoration: none;
+    color: unset;
+  }
+}
+
+//.authentication-body {
+//  .authentication-panel {
+//    background-color: var(--authPanelBg);
+//    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1), 0 24px 36px rgba(0, 0, 0, 0.04);
+//
+//    input {
+//      background-color: var(--inputBg);
+//    }
+//  }
+//}
+
+//.vue_client_recaptcha {
+//  background-color: var(--inputBg);
+//
+//  .vue_client_recaptcha_icon {
+//    &:hover {
+//      .material-symbols-outlined {
+//        background-color: var(--actionIconHoverBg);
+//      }
+//    }
+//  }
+//}
+
+//.p-datatable, .p-treetable {
+//  .p-datatable-header, .p-treetable-header {
+//    background-color: var(--v-data-table-header-color);
+//    color: var(--primary-color-text);
+//  }
+//
+//  .p-datatable-wrapper, .p-treetable-wrapper {
+//    table {
+//      .p-datatable-thead, .p-treetable-thead {
+//        tr {
+//          th {
+//            background-color: var(--v-data-table-header-color);
+//            color: var(--primary-color-text);
+//
+//            .p-column-header-content {
+//              .p-sortable-column-icon {
+//                color: var(--primary-color-text);
+//              }
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//}

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { fetchCourses } from '@/apps/course/api/course-api-rest';
-import '../assets/Home.css'
+import '@/common/pages/assets/Home.css'
 import CourseCard from '@/apps/course/components/CourseCard';
 import { useUserStore } from '@/common/store/user';
 

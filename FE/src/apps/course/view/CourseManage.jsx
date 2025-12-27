@@ -39,8 +39,8 @@ export default function CourseManage() {
             {/* ===== TOOLBAR ===== */}
             <Toolbar className='mb-2 p-0'
                 left={() =>
-                    <div class='align-items-center flex gap-2'>
-                        <div class='font-bold ml-3'>
+                    <div className='align-items-center flex gap-2'>
+                        <div className='font-bold ml-3'>
                             <h3>Course Management</h3>
                         </div>
                     </div>

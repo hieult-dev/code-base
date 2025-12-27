@@ -1,4 +1,4 @@
-import '@/common/assets/Header.css'
+import '@/common/pages/assets/Header.css'
 import { UserRole } from '@/apps/user/model/User'
 import { useNavigate } from 'react-router-dom'
 import { useUserStore } from "../store/user";

@@ -1,0 +1,149 @@
+/* Custom table styles to improve column width issues */
+
+/* Ensure tables have enough minimum width */
+.p-datatable-custom {
+  table-layout: auto;
+}
+
+.p-datatable-custom .p-datatable-table {
+  min-width: 100%;
+}
+
+/* Allow columns to expand based on content */
+.p-datatable-custom .p-datatable-thead > tr > th,
+.p-datatable-custom .p-datatable-tbody > tr > td {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+  .p-datatable-custom .p-datatable-thead > tr > th,
+  .p-datatable-custom .p-datatable-tbody > tr > td {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Ensure header text is aligned properly */
+.p-datatable-custom .p-datatable-thead > tr > th {
+  text-align: left;
+}
+
+/* Add hover effect for better UX */
+.p-datatable-custom .p-datatable-tbody > tr:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Custom column widths for specific use cases */
+.p-datatable-custom .col-min {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.p-datatable-custom .col-fit {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.p-datatable-custom .col-expand {
+  width: auto;
+}
+
+/* Allow column resizing */
+.p-datatable-resizable .p-column-resizer {
+  cursor: col-resize;
+}
+
+/* Grid layout styles for form sections */
+.grid-cols-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
+.col-span-7 {
+  grid-column: span 7 / span 7;
+}
+
+.col-span-8 {
+  grid-column: span 8 / span 8;
+}
+
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+
+.col-span-10 {
+  grid-column: span 10 / span 10;
+}
+
+.col-span-11 {
+  grid-column: span 11 / span 11;
+}
+
+.col-span-12 {
+  grid-column: span 12 / span 12;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1200px) {
+  .col-span-2 {
+    grid-column: span 4 / span 4;
+  }
+  
+  .col-span-4 {
+    grid-column: span 6 / span 6;
+  }
+  
+  .col-span-5 {
+    grid-column: span 8 / span 8;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-span-1,
+  .col-span-2,
+  .col-span-3,
+  .col-span-4,
+  .col-span-5,
+  .col-span-6,
+  .col-span-7,
+  .col-span-8,
+  .col-span-9,
+  .col-span-10,
+  .col-span-11,
+  .col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+  
+  .grid-cols-12 {
+    gap: 0.75rem;
+  }
+}

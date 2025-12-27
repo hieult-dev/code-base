@@ -1,7 +1,7 @@
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom'
-import '@/common/assets/MainLayout.css'
+import '@/common/pages/assets/MainLayout.css'
 
 export default function MainLayout() {
     return (

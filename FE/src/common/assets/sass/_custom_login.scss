@@ -1,0 +1,51 @@
+.authentication-body {
+  max-height: 100vh;
+  height: 100vh;
+
+  .authentication-image {
+    flex: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .authentication-panel {
+    border-radius: 0;
+    flex: 1;
+    overflow-y: auto;
+
+    min-width: 30rem;
+
+    .authentication-input {
+      .material-symbols-outlined {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        left: 0;
+        margin-top: 0;
+      }
+
+      input {
+        border: none;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+.vue_client_recaptcha {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4rem;
+  border-radius: 4px;
+
+  .vue_client_recaptcha_icon {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
