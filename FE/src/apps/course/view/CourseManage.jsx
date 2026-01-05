@@ -4,8 +4,9 @@ import { Toolbar } from 'primereact/toolbar'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import CourseForm from './CourseForm'
+import '@/apps/course/style/CourseManage.css'
 import { fetchCoursesForAdmin } from '@/apps/admin/api/course-api-rest'
-import { DEFAULT_DATATABLE_CONFIG } from '@/common/constants/index'
+
 export default function CourseManage() {
     const [courses, setCourses] = useState([])
     const [loading, setLoading] = useState(false)
@@ -35,79 +36,83 @@ export default function CourseManage() {
     }
 
     return (
-        <>
-            {/* ===== TOOLBAR ===== */}
-            <Toolbar className='mb-2 p-0'
-                left={() =>
-                    <div className='align-items-center flex gap-2'>
-                        <div className='font-bold ml-3'>
-                            <h3>Course Management</h3>
-                        </div>
-                    </div>
-                }
-                right={() => (
-                    <Button
-                        label="Create"
-                        icon="pi pi-plus"
-                        onClick={openCreate}
-                    />
-                )}
-            />
+        <div className="page-wrapper">
+            <div className="page-card">
 
-            {/* ===== TABLE ===== */}
-            <DataTable
-                value={courses}
-                loading={loading}
-                dataKey="id"
-                rowHover
-                stripedRows
-                showGridlines={false}
-                responsiveLayout="scroll"
-                className="p-datatable-sm"
-            >
-                <Column
-                    header="#"
-                    body={(_, opt) => opt.rowIndex + 1}
-                    style={{ width: '60px' }}
-                />
-                <Column field="title" header="Title" />
-                <Column field="description" header="Description" />
-                <Column
-                    field="price"
-                    header="Price"
-                    body={(row) => row.price?.toLocaleString()}
-                />
-                <Column
-                    field="active"
-                    header="Active"
-                    body={(row) => (row.active ? 'Yes' : 'No')}
-                />
-                <Column
-                    header="Action"
-                    body={(row) => (
-                        <div className="flex gap-2">
+                {/* ===== TOOLBAR ===== */}
+                <div className="page-toolbar">
+                    <Toolbar
+                        left={() => (
+                            <h3 className="m-0">Course Management</h3>
+                        )}
+                        right={() => (
                             <Button
-                                icon="pi pi-eye"
-                                text
-                                onClick={() => {
-                                    setSelectedId(row.id)
-                                    setMode('detail')
-                                    setShowForm(true)
-                                }}
+                                label="Create"
+                                icon="pi pi-plus"
+                                onClick={openCreate}
                             />
-                            <Button
-                                icon="pi pi-pencil"
-                                text
-                                onClick={() => {
-                                    setSelectedId(row.id)
-                                    setMode('update')
-                                    setShowForm(true)
-                                }}
-                            />
-                        </div>
-                    )}
-                />
-            </DataTable>
+                        )}
+                    />
+                </div>
+
+                {/* ===== TABLE ===== */}
+                <div className="page-content">
+                    <DataTable
+                        value={courses}
+                        loading={loading}
+                        dataKey="id"
+                        rowHover
+                        stripedRows
+                        responsiveLayout="scroll"
+                        className="p-datatable-sm"
+                    >
+                        <Column
+                            header="#"
+                            body={(_, opt) => opt.rowIndex + 1}
+                            style={{ width: '60px' }}
+                        />
+                        <Column field="title" header="Title" />
+                        <Column field="description" header="Description" />
+                        <Column
+                            field="price"
+                            header="Price"
+                            body={(row) => row.price?.toLocaleString()}
+                        />
+                        <Column
+                            field="active"
+                            header="Active"
+                            body={(row) => (row.active ? 'Yes' : 'No')}
+                        />
+                        <Column
+                            header="Action"
+                            body={(row) => (
+                                <div className="flex gap-2">
+                                    <Button
+                                        icon="pi pi-eye"
+                                        rounded
+                                        outlined
+                                        onClick={() => {
+                                            setSelectedId(row.id)
+                                            setMode('detail')
+                                            setShowForm(true)
+                                        }}
+                                    />
+                                    <Button
+                                        icon="pi pi-pencil"
+                                        rounded
+                                        outlined
+                                        onClick={() => {
+                                            setSelectedId(row.id)
+                                            setMode('update')
+                                            setShowForm(true)
+                                        }}
+                                    />
+                                </div>
+                            )}
+                        />
+                    </DataTable>
+                </div>
+            </div>
 
             {/* ===== FORM ===== */}
             {showForm && (
@@ -119,6 +124,6 @@ export default function CourseManage() {
                     onSuccess={loadCourses}
                 />
             )}
-        </>
+        </div>
     )
 }

@@ -33,7 +33,6 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-
     private final IUserRepository  userRepository;
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
@@ -105,5 +104,4 @@ public class SecurityConfig {
 
         return source;
     }
-
 }

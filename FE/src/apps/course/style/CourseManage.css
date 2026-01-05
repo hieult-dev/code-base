@@ -1,0 +1,34 @@
+/* ===== PAGE WRAPPER ===== */
+.page-wrapper {
+    padding: 1rem;
+}
+
+/* ===== CARD ===== */
+.page-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* ===== TOOLBAR ===== */
+.page-toolbar {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* bỏ style mặc định của Prime Toolbar */
+.page-toolbar .p-toolbar {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* ===== CONTENT (TABLE) ===== */
+.page-content {
+    padding: 0.5rem 0.5rem 0.5rem;
+}
+
+.p-datatable-sm .p-datatable-tbody>tr>td {
+    padding: 0.rem;
+}

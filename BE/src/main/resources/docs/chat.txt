@@ -1,0 +1,26 @@
+Hệ thống học trực tuyến (Learning Platform):
+
+1. Khóa học (Course):
+- Mỗi khóa học gồm nhiều bài học (lesson).
+- Giảng viên là người tạo và quản lý khóa học.
+- Học viên chỉ xem được nội dung sau khi đăng ký.
+
+2. Đăng ký khóa học (Enrollment):
+- Người dùng phải đăng ký để truy cập bài học.
+- Một người có thể đăng ký nhiều khóa học.
+- Không đăng ký thì không xem được lesson.
+
+3. Bài học (Lesson):
+- Lesson thuộc về một course.
+- Lesson gồm video và nội dung mô tả.
+- Chỉ người đã đăng ký mới xem được.
+
+4. Đánh giá (Review):
+- Người dùng chỉ được đánh giá khóa học đã đăng ký.
+- Mỗi người chỉ được đánh giá 1 lần cho mỗi khóa học.
+- Đánh giá gồm số sao và bình luận.
+
+5. Quyền người dùng:
+- ADMIN: quản lý toàn bộ hệ thống.
+- INSTRUCTOR: tạo và chỉnh sửa course của mình.
+- STUDENT: đăng ký khóa học, xem lesson, viết review.

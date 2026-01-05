@@ -27,7 +27,7 @@ public class Course {
     private Double price = 0.0;
 
     @Column(name = "instructor_id")
-    private String instructorId;
+    private Long instructorId;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
