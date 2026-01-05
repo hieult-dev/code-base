@@ -1,4 +1,4 @@
-package com.react.ai.service;
+package com.react.chatBot.service;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.service.AiServices;

@@ -1,4 +1,4 @@
-package com.react.ai.rag.util;
+package com.react.chatBot.rag.util;
 
 import dev.langchain4j.data.segment.TextSegment;
 

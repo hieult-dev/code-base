@@ -1,7 +1,6 @@
-package com.react.ai.rag.config;
+package com.react.chatBot.rag.config;
 
-import com.react.ai.rag.util.TextSplitter;
-import com.react.course.entity.Course;
+import com.react.chatBot.rag.util.TextSplitter;
 import com.react.course.repository.ICourseRepository;
 import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;

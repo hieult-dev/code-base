@@ -105,3 +105,30 @@ SET active = TRUE;
 UPDATE react.courses
 SET active = FALSE
 WHERE id IN (12, 14, 18);
+
+CREATE TABLE chat_sessions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  session_key VARCHAR(64) NOT NULL UNIQUE,
+  user_id INT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_chat_sessions_user
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE SET NULL,
+  INDEX idx_chat_sessions_user (user_id),
+  INDEX idx_chat_sessions_updated (updated_at)
+) ENGINE=InnoDB;
+
+-- 2) Messages
+CREATE TABLE chat_messages (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  session_id BIGINT NOT NULL,
+  role ENUM('user','assistant') NOT NULL,
+  content MEDIUMTEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_chat_messages_session
+    FOREIGN KEY (session_id) REFERENCES chat_sessions(id)
+    ON DELETE CASCADE,
+  INDEX idx_chat_messages_session_time (session_id, created_at),
+  INDEX idx_chat_messages_role (role)
+) ENGINE=InnoDB;

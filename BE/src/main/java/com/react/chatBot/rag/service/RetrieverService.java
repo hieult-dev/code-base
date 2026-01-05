@@ -1,4 +1,4 @@
-package com.react.ai.rag.service;
+package com.react.chatBot.rag.service;
 
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;

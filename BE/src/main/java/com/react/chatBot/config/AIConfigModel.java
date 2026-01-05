@@ -1,4 +1,4 @@
-package com.react.ai.config;
+package com.react.chatBot.config;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import org.springframework.context.annotation.Bean;

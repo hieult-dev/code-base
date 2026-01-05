@@ -1,4 +1,4 @@
-package com.react.ai.rag.config;
+package com.react.chatBot.rag.config;
 
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
