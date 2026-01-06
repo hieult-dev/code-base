@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { fetchCourses } from '@/apps/course/api/course-api-rest';
 import '@/common/pages/assets/Home.css'

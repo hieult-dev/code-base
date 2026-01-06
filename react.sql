@@ -132,3 +132,7 @@ CREATE TABLE chat_messages (
   INDEX idx_chat_messages_session_time (session_id, created_at),
   INDEX idx_chat_messages_role (role)
 ) ENGINE=InnoDB;
+ALTER TABLE chat_messages MODIFY role VARCHAR(16) NOT NULL;
+UPDATE chat_messages
+SET role = UPPER(role)
+WHERE role IN ('user', 'assistant');

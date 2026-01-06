@@ -2,15 +2,12 @@ package com.react.chatBot.controller;
 
 import com.react.chatBot.dto.ChatRequest;
 import com.react.chatBot.dto.ChatResponse;
-import com.react.chatBot.entity.ChatSession;
-import com.react.chatBot.rag.service.RetrieverService;
-import com.react.chatBot.service.AIService;
+import com.react.chatBot.dto.ChatSession;
 import com.react.chatBot.service.ChatService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/chat")
@@ -22,6 +19,7 @@ public class ChatController {
         this.chatService = chatService;
     }
 
+    // fe kh gửi lại SessionId thì là conversation mới
     @PostMapping
     public ChatResponse chat(
             @RequestHeader(value = "X-User-Id", required = false) Long userId,
@@ -39,6 +37,17 @@ public class ChatController {
         return Map.of("sessionId", sessionId);
     }
 
-
-
+    // list các conversation
+    @GetMapping("/sessions")
+    public List<ChatSession> listSessions(
+            @RequestHeader("X-User-Id") Long userId
+    ) {
+        return chatService.findByUserIdOrderByUpdatedAtDesc(userId)
+                .stream()
+                .map(s -> new ChatSession(
+                        s.getSessionKey(),
+                        s.getUpdatedAt()
+                ))
+                .toList();
+    }
 }

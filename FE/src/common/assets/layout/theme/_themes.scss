@@ -1,3 +1,3 @@
-@import './_light';
-@import './_dark';
-@import './_primary';
+@use "./_light" as *;
+@use "./_dark" as *;
+@use "./_primary" as *;

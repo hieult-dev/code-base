@@ -1,14 +1,7 @@
 .home {
     max-width: 1200px;
     margin: 0 auto;
-}
-
-/* Title */
-.page-title {
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #111827;
+    padding: 20px 20px;
 }
 
 /* Grid layout giống Coursera */
@@ -16,10 +9,4 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-}
-
-/* Loading / error text */
-.home p {
-    font-size: 14px;
-    color: #6b7280;
 }

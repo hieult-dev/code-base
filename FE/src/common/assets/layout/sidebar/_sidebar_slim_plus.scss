@@ -1,3 +1,4 @@
+@use "../../vars" as *;
 @media screen and (min-width: $breakpoint) {
   .layout-container {
     &.layout-slim-plus {
@@ -47,17 +48,17 @@
         }
 
         li.active-menuitem {
-          > ul {
+          >ul {
             display: block;
           }
         }
 
         .layout-root-menuitem {
-          > .layout-menuitem-root-text {
+          >.layout-menuitem-root-text {
             display: none;
           }
 
-          > a {
+          >a {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -75,7 +76,8 @@
             font-weight: 600;
             position: relative;
 
-            &.active-menu, &.router-link-active {
+            &.active-menu,
+            &.router-link-active {
               background: var(--v-sidebar-hover-bg);
               color: var(--v-menuitem-active);
 
@@ -109,7 +111,7 @@
             }
           }
 
-          > ul {
+          >ul {
             position: absolute;
             left: 7rem;
             top: 0;

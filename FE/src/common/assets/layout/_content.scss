@@ -1,4 +1,5 @@
-@import "variables";
+@use "../vars" as *;
+
 .layout-content-wrapper {
     transition: margin-left var(--transition-duration);
     padding-top: $topbarHeight;

@@ -1,3 +1,4 @@
-@import './sidebar/_sidebar_vertical';
-@import './sidebar/_sidebar_slim';
-@import './sidebar/_sidebar_slim_plus';
+@use "../vars" as *; // để _sidebar.scss cũng có biến nếu cần
+@use "./sidebar/sidebar_vertical" as *;
+@use "./sidebar/sidebar_slim" as *;
+@use "./sidebar/sidebar_slim_plus" as *;

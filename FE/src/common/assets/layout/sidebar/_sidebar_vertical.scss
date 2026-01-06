@@ -1,4 +1,4 @@
-@import "../variables";
+@use "../../vars" as *; // để _sidebar.scss cũng có biến nếu cần
 
 .layout-sidebar {
     position: fixed;
@@ -25,7 +25,7 @@
         list-style-type: none;
 
         .layout-root-menuitem {
-            > .layout-menuitem-root-text {
+            >.layout-menuitem-root-text {
                 font-size: 0.857rem;
                 text-transform: uppercase;
                 font-weight: 700;
@@ -50,19 +50,20 @@
                 }
             }
 
-            > a {
+            >a {
                 display: none;
             }
         }
 
         li {
             &.active-menuitem {
-                > a {
+                >a {
                     .layout-submenu-toggler {
                         transform: rotate(-180deg);
                     }
                 }
-                > ul {
+
+                >ul {
                     max-height: 1000px;
                     transition: max-height 1s ease-in-out;
                 }

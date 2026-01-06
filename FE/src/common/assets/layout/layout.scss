@@ -1,15 +1,15 @@
 $scale: 14px !default;
 $breakpoint: 992px !default;
 
-@import './_fonts';
-@import './theme/_themes';
-@import './_main';
-@import './_sidebar';
-@import './_topbar';
-@import './_breadcrumb';
-@import './_footer';
-@import './_content';
-@import './_responsive';
-@import './_typography';
-@import './_utils';
-@import './_config';
+@use "./_fonts" as *;
+@use "./theme/_themes" as *;
+@use "./_main" as *;
+@use "./_sidebar" as *;
+@use "./_topbar" as *;
+@use "./_breadcrumb" as *;
+@use "./_footer" as *;
+@use "./_content" as *;
+@use "./_responsive" as *;
+@use "./_typography" as *;
+@use "./_utils" as *;
+@use "./_config" as *;

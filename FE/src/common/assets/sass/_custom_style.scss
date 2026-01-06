@@ -1,6 +1,6 @@
-@import "layout_styles";
-@import "theme_styles";
-@import "_custom_mixin";
+@use "./layout_styles" as *;
+@use "./theme_styles" as *;
+@use "./custom_mixin" as *;
 
 .line-number-1 {
   @include text-ellipsis(1)
@@ -67,22 +67,26 @@
 }
 
 .prevent-select {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently
                                    supported by Chrome, Edge, Opera and Firefox */
 }
 
 .p-icon-field-left {
-  & > .p-input-icon {
+  &>.p-input-icon {
     z-index: 1;
   }
 
-  & > .p-icon-field-right {
-    & > .p-inputtext {
+  &>.p-icon-field-right {
+    &>.p-inputtext {
       padding-left: 2.5rem;
       padding-right: 2.5rem;
     }
@@ -257,15 +261,19 @@
   }
 }
 
-.p-tree, .p-treetable {
+.p-tree,
+.p-treetable {
   &.disabled-tree {
-    .p-tree-wrapper, .p-treetable-wrapper {
+
+    .p-tree-wrapper,
+    .p-treetable-wrapper {
       & * {
         pointer-events: none;
       }
     }
 
-    .p-tree-toggler, .p-treetable-toggler {
+    .p-tree-toggler,
+    .p-treetable-toggler {
       pointer-events: auto;
     }
 
@@ -429,7 +437,7 @@
   color: var(--text-color-sub) !important;
 }
 
-.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight, .highlight-row):hover {
+.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody>tr:not(.p-highlight, .highlight-row):hover {
   background-color: var(--table-body-row-hover-bg);
 }
 
@@ -501,7 +509,7 @@
 }
 
 .p-menuitem .pi-trash,
-.p-menuitem .pi-trash + .p-menuitem-text {
+.p-menuitem .pi-trash+.p-menuitem-text {
   color: var(--red-300) !important;
 }
 
@@ -513,7 +521,7 @@
 
 .custom-tree {
   &.p-treetable {
-    .p-treetable-tbody > tr > td {
+    .p-treetable-tbody>tr>td {
       padding: 7px !important;
 
       .p-treetable-toggler {
@@ -521,7 +529,7 @@
       }
     }
 
-    &.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
+    &.p-treetable-hoverable-rows .p-treetable-tbody>tr:not(.p-highlight):hover {
       background-color: var(--table-body-row-hover-bg);
     }
   }
@@ -533,7 +541,8 @@
   }
 }
 
-.p-button.p-button-p-sm, .p-button {
+.p-button.p-button-p-sm,
+.p-button {
   padding: 0.5rem;
 }
 
@@ -583,7 +592,9 @@
 }
 
 .doc-in-action-buttons {
-  .btn-flow-doc, .btn-action {
+
+  .btn-flow-doc,
+  .btn-action {
     background-color: var(--surface-0) !important;
     border-color: transparent !important;
 
@@ -633,7 +644,7 @@
   }
 }
 
-.p-datatable .p-datatable-thead > tr > th {
+.p-datatable .p-datatable-thead>tr>th {
   background-color: var(--surface-100);
 }
 
@@ -641,10 +652,11 @@
   background-color: var(--surface-100);
 }
 
-.p-treetable .p-treetable-thead > tr > th {
+.p-treetable .p-treetable-thead>tr>th {
   background-color: var(--surface-100);
 }
 
-.p-row-even:hover, .p-row-odd:hover {
+.p-row-even:hover,
+.p-row-odd:hover {
   background-color: var(--table-body-row-hover-bg);
 }
