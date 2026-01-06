@@ -15,7 +15,7 @@ CONTEXT:
 {{context}}
 
 Nếu CONTEXT rỗng hoặc không đủ thông tin,
-hãy trả lời đúng câu: "Tôi không chắc".
+hãy trả lời đúng câu: "Xin lỗi câu hỏi của bạn nằm ngoài tầm hiểu biết của tôi!".
 KHÔNG suy đoán, KHÔNG bịa.
 """)
     String chat(

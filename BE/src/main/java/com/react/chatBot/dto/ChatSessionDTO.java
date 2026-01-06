@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ChatSession {
+public class ChatSessionDTO {
     private String sessionId;
     private LocalDateTime updatedAt;
 }

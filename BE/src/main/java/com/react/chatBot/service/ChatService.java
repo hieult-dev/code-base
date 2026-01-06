@@ -1,14 +1,16 @@
 package com.react.chatBot.service;
 
-import com.react.chatBot.dto.ChatMessagesDTO;
-import com.react.chatBot.dto.ChatResponse;
+import com.react.chatBot.dto.ChatMessageDTO;
+import com.react.chatBot.dto.ChatResponseDTO;
 import com.react.chatBot.entity.ChatSession;
 import com.react.chatBot.entity.MessageRole;
+import com.react.chatBot.exception.ConversationNotFound;
 import com.react.chatBot.rag.service.RetrieverService;
 import com.react.chatBot.repository.IChatMessageRepository;
 import com.react.chatBot.repository.IChatSessionRepository;
 import com.react.chatBot.entity.ChatMessages;
 import com.react.websocket.dto.ChatWsResponse;
+import org.modelmapper.ModelMapper;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,23 +28,24 @@ public class ChatService {
     private final IChatSessionRepository chatSessionRepo;
     private final IChatMessageRepository chatMessageRepo;
     private final SimpMessagingTemplate messagingTemplate;
-
+    private final ModelMapper modelMapper;
 
     public ChatService(
             AIService aiService,
             RetrieverService retrieverService,
             IChatSessionRepository chatSessionRepo,
-            IChatMessageRepository chatMessageRepo, SimpMessagingTemplate messagingTemplate
+            IChatMessageRepository chatMessageRepo, SimpMessagingTemplate messagingTemplate, ModelMapper modelMapper
     ) {
         this.aiService = aiService;
         this.retrieverService = retrieverService;
         this.chatSessionRepo = chatSessionRepo;
         this.chatMessageRepo = chatMessageRepo;
         this.messagingTemplate = messagingTemplate;
+        this.modelMapper = modelMapper;
     }
 
     @Transactional
-    public ChatResponse chat(Long userId, String sessionId, String message) {
+    public ChatResponseDTO chat(Long userId, String sessionId, String message) {
 
         String sid = (sessionId == null || sessionId.isBlank())
                 ? UUID.randomUUID().toString()
@@ -76,12 +79,12 @@ public class ChatService {
 
         // 5) build prompt có history + rag
         String combinedContext = """
-Conversation so far:
-%s
-
-Relevant knowledge:
-%s
-""".formatted(
+                Conversation so far:
+                %s
+                
+                Relevant knowledge:
+                %s
+                """.formatted(
                 conversationContext,
                 (ragContext == null ? "" : ragContext)
         );
@@ -97,7 +100,7 @@ Relevant knowledge:
         // 7) lưu assistant
         ChatMessages botMsg = chatMessageRepo.save(ChatMessages.assistant(session, answer));
 
-        return new ChatResponse(sid, botMsg.getId(), answer);
+        return new ChatResponseDTO(sid, botMsg.getId(), answer);
     }
 
     @Transactional
@@ -146,7 +149,7 @@ Relevant knowledge:
         );
 
         try {
-            ChatResponse res = this.chat(userId, sessionId, message);
+            ChatResponseDTO res = this.chat(userId, sessionId, message);
 
             // ASSISTANT_MESSAGE
             messagingTemplate.convertAndSend(topic,
@@ -181,25 +184,20 @@ Relevant knowledge:
     }
 
     @Transactional(readOnly = true)
-    public List<ChatMessagesDTO> getMessagesBySessionKey(Long userId, String sessionKey) {
+    public List<ChatMessageDTO> getMessagesBySessionKey(Long userId, String sessionKey) {
 
         ChatSession session = chatSessionRepo.findBySessionKey(sessionKey)
-                .orElseThrow(() -> new RuntimeException("Session not found"));
+                .orElseThrow(() -> new ConversationNotFound("ConversationNotFound", "Conversation not found"));
 
         // optional: check ownership
         if (userId != null && session.getUserId() != null &&
                 !session.getUserId().equals(userId)) {
-            throw new RuntimeException("Forbidden");
+            throw new ConversationNotFound("ConversationNotFound", "Conversation not found");
         }
 
         return chatMessageRepo.findBySessionKeyOrderByCreatedAtAsc(sessionKey)
                 .stream()
-                .map(m -> new ChatMessagesDTO(
-                        m.getId(),
-                        m.getRole().name(),
-                        m.getContent(),
-                        m.getCreatedAt()
-                ))
+                .map(m -> modelMapper.map(m, ChatMessageDTO.class))
                 .toList();
     }
 

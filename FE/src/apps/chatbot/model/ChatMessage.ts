@@ -1,7 +1,8 @@
-export type ChatRole = "user" | "assistant" | "system";
+export type MessageRole = "user" | "assistant" | "system";
 
 export interface ChatMessage {
-    role: ChatRole;
-    text: string;
-    messageId?: number;
+    role: MessageRole;
+    content: string;
+    id?: number;
+    createdAt?: string;
 }
