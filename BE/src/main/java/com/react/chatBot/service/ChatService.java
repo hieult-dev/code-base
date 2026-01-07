@@ -155,7 +155,7 @@ public class ChatService {
             messagingTemplate.convertAndSend(topic,
                     ChatWsResponse.builder()
                             .type("ASSISTANT_MESSAGE")
-                            .sessionId(res.getSessionId())   // nếu ChatResponse là class getter
+                            .sessionId(res.getSessionId())
                             .content(res.getAnswer())
                             .messageId(res.getMessageId())
                             .build()
