@@ -78,6 +78,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
     const msg: ChatMessage = {
       role: "user",
       content,
+      clientId: crypto.randomUUID(),
       createdAt: new Date().toISOString(),
     };
 
@@ -90,10 +91,14 @@ export const useChatStore = create<ChatState>((set, get) => ({
   },
 
   addAssistantMessage: (sessionId, msg) => {
+    const incoming = {
+      ...msg,
+      clientId: msg.clientId ?? crypto.randomUUID(),
+    };
     set((st) => ({
       messagesBySessionId: {
         ...st.messagesBySessionId,
-        [sessionId]: [...(st.messagesBySessionId[sessionId] ?? []), msg],
+        [sessionId]: [...(st.messagesBySessionId[sessionId] ?? []), incoming],
       },
     }));
   },

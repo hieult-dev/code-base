@@ -4,5 +4,6 @@ export interface ChatMessage {
     role: MessageRole;
     content: string;
     id?: number;
+    clientId?: string;
     createdAt?: string;
 }
