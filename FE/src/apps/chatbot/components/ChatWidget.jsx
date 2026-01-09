@@ -112,7 +112,7 @@ export default function ChatWidget({ userId = 1 }) {
           <div className="chat-body" ref={bodyRef}>
             {messages.map((m, i) => (
               <div
-                key={m.id ?? i}
+                key={m.id != null ? `id-${m.id}` : `idx-${i}`}
                 className={`chat-msg ${String(m.role).toLowerCase()}`}
               >
                 {m.content}

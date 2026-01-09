@@ -24,7 +24,7 @@ public class ChatMessages {
     @Enumerated(EnumType.STRING)
     private MessageRole role;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "created_at")
